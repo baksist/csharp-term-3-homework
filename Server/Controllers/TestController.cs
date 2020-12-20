@@ -1,16 +1,20 @@
+using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TestController : Controller
+    public class TestController : ControllerBase
     {
         // GET
         [HttpGet]
         public string Get()
         {
-            return "test string";
+            return "this is a test string";
         }
     }
 }
