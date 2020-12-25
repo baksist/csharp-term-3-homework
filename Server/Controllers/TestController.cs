@@ -10,11 +10,22 @@ namespace Server.Controllers
     [Route("[controller]")]
     public class TestController : ControllerBase
     {
-        // GET
         [HttpGet]
-        public string Get()
+        public List<Message> Get()
         {
-            return "this is a test string";
+            return Program.Messages;
+        }
+
+        [HttpPost]
+        public void Post([FromBody] Message obj)
+        {
+            Program.Messages.Add(obj);
+        }
+
+        [HttpDelete]
+        public void Delete(int id)
+        {
+            Program.Messages.RemoveAt(id);
         }
     }
 }

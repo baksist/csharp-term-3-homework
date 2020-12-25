@@ -4,9 +4,9 @@ namespace Server
 {
     public class Message
     {
-        public string Text;
-        public string Username;
-        public DateTime Date;
+        public string Text { get; set; }
+        public string Username { get; set; }
+        public DateTime Date { get; set; }
 
         public Message()
         {
@@ -20,11 +20,6 @@ namespace Server
             Text = text;
             Username = text;
             Date = date;
-        }
-
-        public override string ToString()
-        {
-            return Username + ": " + Text + " at " + Date;
         }
     }
 }
