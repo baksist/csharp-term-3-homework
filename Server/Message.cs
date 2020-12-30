@@ -2,6 +2,7 @@ using System;
 
 namespace Server
 {
+    [Serializable]
     public class Message
     {
         public string Text { get; set; }

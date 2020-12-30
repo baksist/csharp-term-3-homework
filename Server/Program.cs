@@ -12,8 +12,10 @@ namespace Server
     public class Program
     {
         public static List<Message> Messages = new List<Message>();
+        
         public static void Main(string[] args)
         {
+            Logger.Load();
             CreateHostBuilder(args).Build().Run();
         }
 
