@@ -7,7 +7,7 @@ namespace Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TestController : ControllerBase
+    public class ChatController : ControllerBase
     {
         [HttpGet]
         public List<Message> Get()
