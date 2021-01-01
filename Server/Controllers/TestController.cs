@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Server.Models;
 
 namespace Server.Controllers
 {
@@ -16,12 +15,14 @@ namespace Server.Controllers
             return Program.Messages;
         }
 
+        [Authorize]
         [HttpPost]
         public void Post([FromBody] Message obj)
         {
             Program.Messages.Add(obj);
         }
-
+        
+        [Authorize(Roles = "admin")]
         [HttpDelete]
         public void Delete(int id)
         {
