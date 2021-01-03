@@ -9,16 +9,29 @@ using Server.Models;
 
 namespace Server.Controllers
 {
+    /// <summary>
+    /// Controller for managing user authentication.
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class UsersController : Controller
     {
+        /// <summary>
+        /// GET request
+        /// </summary>
+        /// <returns>List of all registered users</returns>
         [HttpGet]
         public List<ChatUser> Get()
         {
             return Program.Users;
         }
         
+        /// <summary>
+        /// POST request for JWT authentication.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns>JSON Bearer token for provided user credentials.</returns>
         [HttpPost("/[controller]/token")]
         public IActionResult Token(string username, string password)
         {
@@ -41,6 +54,14 @@ namespace Server.Controllers
             return Json(response);
         }
 
+        /// <summary>
+        /// Function for creating a ClaimsIdentity object from username and password.
+        /// If user with provided credentials does not exist, creates it.
+        /// If a new user tries to use an already existing username, returns null 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         private ClaimsIdentity CreateIdentity(string username, string password)
         {
             var user = Program.Users.FirstOrDefault(x => x.Username == username && x.Password == password);

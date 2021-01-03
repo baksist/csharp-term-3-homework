@@ -31,6 +31,10 @@ namespace Server
 
         public IConfiguration Configuration { get; }
         
+        /// <summary>
+        /// Function that saves message history to a file every N milliseconds.
+        /// N is specified as LogSavePeriod in Logger class.
+        /// </summary>
         public static void SaveLog()
         {
             while (true)
@@ -44,6 +48,10 @@ namespace Server
             }
         }
 
+        /// <summary>
+        /// Function that saves user info to a file every N milliseconds.
+        /// N is specified as UsersSavePeriod in Logger class
+        /// </summary>
         public static void SaveUsers()
         {
             while (true)
@@ -53,6 +61,10 @@ namespace Server
             }
         }
 
+        /// <summary>
+        /// Function that monitors user activity.
+        /// If a user is inactive for more that TimeoutSeconds, they will be deleted from ActiveUsers list.
+        /// </summary>
         public static void ActivityMonitor()
         {
             var removeList = new List<ActiveUser>();

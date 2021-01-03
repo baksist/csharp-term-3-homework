@@ -2,6 +2,9 @@ using System;
 
 namespace Server.Models
 {
+    /// <summary>
+    /// Message class
+    /// </summary>
     [Serializable]
     public class Message
     {

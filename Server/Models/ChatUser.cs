@@ -1,5 +1,8 @@
 ﻿namespace Server.Models
 {
+    /// <summary>
+    /// Class representing a user
+    /// </summary>
     public class ChatUser
     {
         public string Username { get; set; }

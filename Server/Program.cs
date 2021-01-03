@@ -2,15 +2,25 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Server.Models;
-using System.Text.RegularExpressions;
 using Server.Utils;
 
 namespace Server
 {
     public class Program
     {
+        /// <summary>
+        /// List with message history.
+        /// </summary>
         public static List<Message> Messages = new List<Message>();
+        
+        /// <summary>
+        /// List with users and their roles
+        /// </summary>
         public static List<ChatUser> Users = new List<ChatUser>();
+        
+        /// <summary>
+        /// List with active users.
+        /// </summary>
         public static List<ActiveUser> ActiveUsers = new List<ActiveUser>();
         private static string customURL = "http://localhost:5000";
         
