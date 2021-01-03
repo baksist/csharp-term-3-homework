@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Threading;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Server.Models;
 
 namespace Server
 {
@@ -15,11 +18,15 @@ namespace Server
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            
             var logThread = new Thread(SaveLog) {Name = "logThread"};
-            var usersThread = new Thread(SaveUsers) {Name = "usersThread"};
-
             logThread.Start();
+            
+            var usersThread = new Thread(SaveUsers) {Name = "usersThread"};
             usersThread.Start();
+
+            var activityThread = new Thread(ActivityMonitor) {Name = "activityThread"};
+            activityThread.Start();
         }
 
         public IConfiguration Configuration { get; }
@@ -43,6 +50,29 @@ namespace Server
             {
                 Logger.SaveUsers();
                 Thread.Sleep(Logger.UsersSavePeriod);
+            }
+        }
+
+        public static void ActivityMonitor()
+        {
+            var removeList = new List<ActiveUser>();
+            while (true)
+            {
+                foreach (var user in Program.ActiveUsers)
+                {
+                    if (user.LastSeen.AddSeconds(ActiveUser.TimeoutSeconds) < DateTime.Now)
+                    {
+                        Program.Messages.Add(new Message($"{user.Username} disconnected", "system", DateTime.Now));
+                        removeList.Add(user);
+                    }
+                }
+
+                foreach (var user in removeList)
+                {
+                    Program.ActiveUsers.Remove(user);
+                }
+                
+                Thread.Sleep(ActiveUser.MonitorPeriod);
             }
         }
 

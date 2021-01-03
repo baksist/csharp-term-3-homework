@@ -5,12 +5,13 @@ using Server.Models;
 
 namespace Server
 {
-    // TODO: add activity controller
     // TODO: add IP and port settings
     public class Program
     {
         public static List<Message> Messages = new List<Message>();
         public static List<ChatUser> Users = new List<ChatUser>();
+        public static List<ActiveUser> ActiveUsers = new List<ActiveUser>();
+        
         
         public static void Main(string[] args)
         {
