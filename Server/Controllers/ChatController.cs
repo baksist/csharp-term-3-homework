@@ -32,14 +32,25 @@ namespace Server.Controllers
         {
             Program.Messages.Add(obj);
         }
+
+        /// <summary>
+        /// DELETE request that clears message history.
+        /// Only admin users can delete messages.
+        /// </summary>
+        [Authorize(Roles = "admin")]
+        [HttpDelete]
+        public void Delete()
+        {
+            Program.Messages.Clear();
+        }
         
         /// <summary>
-        /// DELETE requests that deletes the message by its ID number.
+        /// DELETE request that deletes the message by its ID number.
         /// Only admin users can delete messages.
         /// </summary>
         /// <param name="id"></param>
         [Authorize(Roles = "admin")]
-        [HttpDelete]
+        [HttpDelete("/[controller]/{id}")]
         public void Delete(int id)
         {
             Program.Messages.RemoveAt(id);

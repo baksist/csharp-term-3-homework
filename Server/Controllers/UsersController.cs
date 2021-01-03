@@ -33,9 +33,9 @@ namespace Server.Controllers
         /// <param name="password"></param>
         /// <returns>JSON Bearer token for provided user credentials.</returns>
         [HttpPost("/[controller]/token")]
-        public IActionResult Token(string username, string password)
+        public IActionResult Token([FromBody] userData creds)
         {
-            var identity = CreateIdentity(username, password);
+            var identity = CreateIdentity(creds.username, creds.password);
 
             if (identity == null)
                 return BadRequest();
@@ -50,7 +50,7 @@ namespace Server.Controllers
                 signingCredentials: new SigningCredentials(TokenOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
             var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
 
-            var response = new {access_token = encodedToken, username = identity.Name};
+            var response = new {access_token = encodedToken};
             return Json(response);
         }
 
@@ -86,6 +86,15 @@ namespace Server.Controllers
             }
 
             return null;
+        }
+        
+        /// <summary>
+        /// workaround class to post user creds as JSON object
+        /// </summary>
+        public class userData
+        {
+            public string username { get; set; }
+            public string password { get; set; }
         }
     }
 }
