@@ -6,6 +6,7 @@ namespace ConsoleClient
 {
     public class Activity
     {
+        public static int ActivityPeriod = 150;
         public static void Update()
         {
             while (true)
@@ -13,7 +14,7 @@ namespace ConsoleClient
                 var request = new HttpRequestMessage(HttpMethod.Post, Program.appPath + "/activity");
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Program.token);
                 var response = Program.client.SendAsync(request);
-                Thread.Sleep(150);
+                Thread.Sleep(ActivityPeriod);
             }
         }
     }

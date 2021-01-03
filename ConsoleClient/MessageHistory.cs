@@ -8,6 +8,7 @@ namespace ConsoleClient
 {
     public class MessageHistory
     {
+        public static int UpdatePeriod = 200;
         public static void Update()
         {
             while (true)
@@ -20,7 +21,7 @@ namespace ConsoleClient
                     Console.WriteLine(msg);
                 }
                 
-                Thread.Sleep(200);
+                Thread.Sleep(UpdatePeriod);
             }
         }
     }
