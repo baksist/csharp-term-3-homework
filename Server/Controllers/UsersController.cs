@@ -19,7 +19,7 @@ namespace Server.Controllers
             return Program.Users;
         }
         
-        [HttpPost("[controller]/token")]
+        [HttpPost("/[controller]/token")]
         public IActionResult Token(string username, string password)
         {
             var identity = CreateIdentity(username, password);
@@ -44,7 +44,7 @@ namespace Server.Controllers
         private ClaimsIdentity CreateIdentity(string username, string password)
         {
             var user = Program.Users.FirstOrDefault(x => x.Username == username && x.Password == password);
-
+            // TODO: add new users and check for unique nicknames
             if (user != null)
             {
                 var claims = new List<Claim>

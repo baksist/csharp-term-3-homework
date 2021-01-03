@@ -7,7 +7,7 @@ namespace Server
     {
         public const string ISSUER = "ChatAuthServer";
         public const string AUDIENCE = "ChatUser";
-        private const string KEY = "AHDHWAkdshdhasDUKHAWD";
+        private const string KEY = "This is a secret key.";
         public const int LIFETIME = 1;
 
         public static SymmetricSecurityKey GetSymmetricSecurityKey()

@@ -19,7 +19,7 @@ namespace Server.Models
         public Message(string text, string username, DateTime date)
         {
             Text = text;
-            Username = text;
+            Username = username;
             Date = date;
         }
     }

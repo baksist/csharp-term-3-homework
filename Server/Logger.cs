@@ -8,17 +8,19 @@ namespace Server
 {
     public class Logger
     {
-        public const int SavePeriod = 5000;
+        public const int LogSavePeriod = 5000;
+        public const int UsersSavePeriod = 10000;
         public const string LogPath = "Utils/messageLog.json";
+        public const string UsersPath = "Utils/users.json";
 
-        public static void Save()
+        public static void SaveLog()
         {
             var writer = new StreamWriter(LogPath, false);
             writer.Write(JsonConvert.SerializeObject(Program.Messages));
             writer.Close();
         }
 
-        public static void Load()
+        public static void LoadLog()
         {
             try
             {
@@ -31,6 +33,27 @@ namespace Server
                 Console.WriteLine("Log file not found, message history is unavailable");
             }
             
+        }
+
+        public static void SaveUsers()
+        {
+            var writer = new StreamWriter(UsersPath, false);
+            writer.Write(JsonConvert.SerializeObject(Program.Users));
+            writer.Close();
+        }
+
+        public static void LoadUsers()
+        {
+            try
+            {
+                var reader = new StreamReader(UsersPath);
+                Program.Users = JsonConvert.DeserializeObject<List<ChatUser>>(reader.ReadToEnd());
+                reader.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Users' data not found");
+            }
         }
     }
 }

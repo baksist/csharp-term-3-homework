@@ -5,6 +5,8 @@ using Server.Models;
 
 namespace Server
 {
+    // TODO: add activity controller
+    // TODO: add IP and port settings
     public class Program
     {
         public static List<Message> Messages = new List<Message>();
@@ -12,9 +14,8 @@ namespace Server
         
         public static void Main(string[] args)
         {
-            Logger.Load();
-            Users.Add(new ChatUser());
-            Users.Add(new ChatUser{ Username = "admin1337", Password = "kek", Role = "admin" });
+            Logger.LoadLog();
+            Logger.LoadUsers();
             CreateHostBuilder(args).Build().Run();
         }
 

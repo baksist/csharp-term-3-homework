@@ -16,17 +16,30 @@ namespace Server
         {
             Configuration = configuration;
             var logThread = new Thread(SaveLog) {Name = "logThread"};
+            var usersThread = new Thread(SaveUsers) {Name = "usersThread"};
+
             logThread.Start();
+            usersThread.Start();
         }
 
         public IConfiguration Configuration { get; }
-
+        
+        // TODO: clear log every N messages
         public static void SaveLog()
         {
             while (true)
             {
-                Logger.Save();
-                Thread.Sleep(Logger.SavePeriod);
+                Logger.SaveLog();
+                Thread.Sleep(Logger.LogSavePeriod);
+            }
+        }
+
+        public static void SaveUsers()
+        {
+            while (true)
+            {
+                Logger.SaveUsers();
+                Thread.Sleep(Logger.UsersSavePeriod);
             }
         }
 
