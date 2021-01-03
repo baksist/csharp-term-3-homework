@@ -24,14 +24,13 @@ namespace Server
 
         public IConfiguration Configuration { get; }
         
-        // TODO: clear log every N messages
         public static void SaveLog()
         {
             while (true)
             {
-                if (Program.Messages.Count > 500)
+                if (Program.Messages.Count > Logger.MaxMessageCount)
                 {
-                    Program.Messages.RemoveRange(0, 100);
+                    Program.Messages.RemoveRange(0, Logger.DeleteMessagesCount);
                 }
                 Logger.SaveLog();
                 Thread.Sleep(Logger.LogSavePeriod);

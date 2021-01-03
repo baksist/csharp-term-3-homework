@@ -10,6 +10,8 @@ namespace Server
     {
         public const int LogSavePeriod = 5000;
         public const int UsersSavePeriod = 10000;
+        public const int MaxMessageCount = 500;
+        public const int DeleteMessagesCount = 100;
         public const string LogPath = "Utils/messageLog.json";
         public const string UsersPath = "Utils/users.json";
 
