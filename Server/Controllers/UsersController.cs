@@ -44,7 +44,13 @@ namespace Server.Controllers
         private ClaimsIdentity CreateIdentity(string username, string password)
         {
             var user = Program.Users.FirstOrDefault(x => x.Username == username && x.Password == password);
-            // TODO: add new users and check for unique nicknames
+            
+            if (user == null && !(Program.Users.Any(x => x.Username == username)))
+            {
+                user = new ChatUser {Username = username, Password = password, Role = "user"};
+                Program.Users.Add(user);
+            }
+            
             if (user != null)
             {
                 var claims = new List<Claim>

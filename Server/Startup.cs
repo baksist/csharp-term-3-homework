@@ -29,6 +29,10 @@ namespace Server
         {
             while (true)
             {
+                if (Program.Messages.Count > 500)
+                {
+                    Program.Messages.RemoveRange(0, 100);
+                }
                 Logger.SaveLog();
                 Thread.Sleep(Logger.LogSavePeriod);
             }
