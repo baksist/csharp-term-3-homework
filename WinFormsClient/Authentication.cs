@@ -13,6 +13,9 @@ namespace WinFormsClient
     {
         public static void Authenticate(string newUsername, string newPassword)
         {
+            Program.Username = newUsername;
+            Program.Password = newPassword;
+
             var requestData = new
             {
                 username = newUsername,
