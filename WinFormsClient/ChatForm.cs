@@ -26,10 +26,10 @@ namespace WinFormsClient
 
         private void ChatForm_Load(object sender, EventArgs e)
         {
-            
+            this.Size = new Size(Program.Size[0], Program.Size[1]);
         }
 
-        public int UpdatePeriod = 200;
+        public static int UpdatePeriod = 200;
         public void UpdateChatBox()
         {
             var response = Program.Client.GetAsync(Program.AppPath + "/chat");

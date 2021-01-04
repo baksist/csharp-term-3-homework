@@ -15,6 +15,7 @@ namespace WinFormsClient
         public static string Username;
         public static string Password;
         public static string Role;
+        public static int[] Size = new int[2];
 
         /// <summary>
         /// The main entry point for the application.

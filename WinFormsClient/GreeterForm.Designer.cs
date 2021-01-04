@@ -34,6 +34,7 @@
             this.loginLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.loginButton = new System.Windows.Forms.Button();
+            this.configCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // WelcomeLabel
@@ -94,11 +95,23 @@
             this.loginButton.UseVisualStyleBackColor = true;
             this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
+            // configCheckBox
+            // 
+            this.configCheckBox.AutoSize = true;
+            this.configCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            this.configCheckBox.Location = new System.Drawing.Point(317, 245);
+            this.configCheckBox.Name = "configCheckBox";
+            this.configCheckBox.Size = new System.Drawing.Size(151, 24);
+            this.configCheckBox.TabIndex = 6;
+            this.configCheckBox.Text = "Load/Save config";
+            this.configCheckBox.UseVisualStyleBackColor = true;
+            // 
             // GreeterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.configCheckBox);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.loginLabel);
@@ -120,6 +133,7 @@
         private System.Windows.Forms.Label loginLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button loginButton;
+        private System.Windows.Forms.CheckBox configCheckBox;
     }
 }
 
