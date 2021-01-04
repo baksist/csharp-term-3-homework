@@ -17,7 +17,7 @@ namespace ConsoleClient
 
         public override string ToString()
         {
-            return $"[{Date.ToString("hh:mm:ss")}] {Username}: {Text}";
+            return $"[{Date.ToString("g")}] {Username}: {Text}";
         }
     }
 }

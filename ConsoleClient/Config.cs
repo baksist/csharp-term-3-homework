@@ -19,7 +19,6 @@ namespace ConsoleClient
                 Program.username = properties["username"];
                 Program.password = properties["password"];
                 MessageHistory.UpdatePeriod = Int32.Parse(properties["message_update"]);
-                Activity.ActivityPeriod = Int32.Parse(properties["online_update"]);
                 reader.Close();
             }
             catch (Exception e)
@@ -33,15 +32,12 @@ namespace ConsoleClient
             Program.Login();
             Console.Write("Enter message update period (in ms): ");
             MessageHistory.UpdatePeriod = Int32.Parse(Console.ReadLine());
-            Console.Write("Enter online activity update period (in ms): ");
-            Activity.ActivityPeriod = Int32.Parse(Console.ReadLine());
 
             var properties = new Dictionary<string, string>
             {
                 {"username", Program.username},
                 {"password", Program.password},
                 {"message_update", MessageHistory.UpdatePeriod.ToString()},
-                {"online_update", Activity.ActivityPeriod.ToString()}
             };
             
             var writer = new StreamWriter(ConfigPath, false);

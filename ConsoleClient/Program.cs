@@ -19,11 +19,12 @@ namespace ConsoleClient
         
         static void Main(string[] args)
         {
+            /*
             if (File.Exists(Config.ConfigPath))
             {
                 Console.WriteLine("Config file found! Do you want to load it? (y/n)");
-                char c = (char)Console.Read();
-                if (c == 'y')
+                var c = Console.ReadLine();
+                if (c == "y")
                     Config.Load();
                 else
                 {
@@ -34,8 +35,8 @@ namespace ConsoleClient
             else
             {
                 Console.WriteLine("Config file not found! Do you want to create it? (y/n)");
-                char c = (char)Console.Read();
-                if (c == 'y')
+                var c = Console.ReadLine();
+                if (c == "y")
                     Config.Create();
                 else
                 {
@@ -43,9 +44,10 @@ namespace ConsoleClient
                     Login();
                 }
             }
+            */
             
-            //username = "new_user";
-            //password = "12345";
+            username = "new_user";
+            password = "12345";
             
             Authenticate(username, password);
 

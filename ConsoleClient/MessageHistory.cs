@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using Newtonsoft.Json;
@@ -11,16 +12,42 @@ namespace ConsoleClient
         public static int UpdatePeriod = 200;
         public static void Update()
         {
+            var response = Program.client.GetAsync(Program.appPath + "/chat");
+            var Messages =
+                JsonConvert.DeserializeObject<List<Message>>(response.Result.Content.ReadAsStringAsync().Result);
+            foreach (var msg in Messages)
+            {
+                Console.WriteLine($"#{Messages.FindIndex(x => x == msg)}, {msg}");
+            }
+            
             while (true)
             {
-                var response = Program.client.GetAsync(Program.appPath + "/chat");
-                var Messages =
+                response = Program.client.GetAsync(Program.appPath + "/chat");
+                var newMessages = 
                     JsonConvert.DeserializeObject<List<Message>>(response.Result.Content.ReadAsStringAsync().Result);
-                foreach (var msg in Messages)
+                if (newMessages.Count > Messages.Count)
                 {
-                    Console.WriteLine(msg);
+                    var messagesToAdd = new List<Message>();
+                    for (var i = 0; i < newMessages.Count; i++)
+                    {
+                        if (i >= Messages.Count)
+                        {
+                            Console.WriteLine($"#{i}, {newMessages[i]}");
+                            messagesToAdd.Add(newMessages[i]);
+                        }
+                    }
+                    Messages.AddRange(messagesToAdd);
+                    messagesToAdd.Clear();
                 }
-                
+                else if (newMessages.Count < Messages.Count)
+                {
+                    Console.Clear();
+                    Messages = newMessages;
+                    foreach (var msg in Messages)
+                    {
+                        Console.WriteLine($"#{Messages.FindIndex(x => x == msg)}, {msg}");
+                    }
+                }
                 Thread.Sleep(UpdatePeriod);
             }
         }

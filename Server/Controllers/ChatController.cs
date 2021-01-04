@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,12 +26,13 @@ namespace Server.Controllers
         /// <summary>
         /// POST request that appends a new message to message list.
         /// </summary>
-        /// <param name="obj">A new message</param>
+        /// <param name="msg">A new message</param>
         [Authorize]
         [HttpPost]
-        public void Post([FromBody] Message obj)
+        public void Post([FromBody] Message msg)
         {
-            Program.Messages.Add(obj);
+            msg.Date = DateTime.Now;
+            Program.Messages.Add(msg);
         }
 
         /// <summary>
