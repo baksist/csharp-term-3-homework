@@ -11,46 +11,19 @@ namespace ConsoleClient
 {
     class Program
     {
-        public static string appPath = "http://localhost:5000";
-        public static string token;
-        public static HttpClient client = new HttpClient();
-        public static string username;
-        public static string password;
-        public static string role;
+        public static string AppPath = "http://localhost:5000";
+        public static string Token;
+        public static HttpClient Client = new HttpClient();
+        public static string Username;
+        public static string Password;
+        public static string Role;
         
         static void Main(string[] args)
         {
-            /*
-            if (File.Exists(Config.ConfigPath))
-            {
-                Console.WriteLine("Config file found! Do you want to load it? (y/n)");
-                var c = Console.ReadLine();
-                if (c == "y")
-                    Config.Load();
-                else
-                {
-                    Console.WriteLine("Ok, using default settings");
-                    Login();
-                }
-            }
-            else
-            {
-                Console.WriteLine("Config file not found! Do you want to create it? (y/n)");
-                var c = Console.ReadLine();
-                if (c == "y")
-                    Config.Create();
-                else
-                {
-                    Console.WriteLine("Ok, using default settings");
-                    Login();
-                }
-            }
-            */
-            
-            username = "admin1337";
-            password = "kek";
-            
-            Authenticate(username, password);
+
+            Config.Greeter();
+
+            Authenticate(Username, Password);
 
             var activityThread = new Thread(Activity.Update) {Name = "activityThread"};
             activityThread.Start();
@@ -64,30 +37,30 @@ namespace ConsoleClient
             }
         }
 
-        static void Authenticate(string _username, string _password)
+        private static void Authenticate(string newUsername, string newPassword)
         {
             var requestData = new
             {
-                username = _username,
-                password = _password
+                username = newUsername,
+                password = newPassword
             };
-            var response = client.PostAsJsonAsync(appPath + "/users/token", requestData);
+            var response = Client.PostAsJsonAsync(AppPath + "/users/token", requestData);
             var rep = response.Result.Content.ReadAsStringAsync().Result;
-            token = JsonConvert.DeserializeObject<Dictionary<string, string>>(rep)["access_token"];
-            role = JsonConvert.DeserializeObject<Dictionary<string, string>>(rep)["role"];
+            Token = JsonConvert.DeserializeObject<Dictionary<string, string>>(rep)["access_token"];
+            Role = JsonConvert.DeserializeObject<Dictionary<string, string>>(rep)["role"];
         }
 
         public static void Login()
         {
             Console.Write("Enter login: ");
-            username = Console.ReadLine();
+            Username = Console.ReadLine();
             Console.Write("Enter password: ");
             while (true)
             {
                 var key = Console.ReadKey(true);
                 if (key.Key == ConsoleKey.Enter)
                     break;
-                password += key.KeyChar;
+                Password += key.KeyChar;
             }
         }
     }

@@ -12,7 +12,7 @@ namespace ConsoleClient
         public static int UpdatePeriod = 200;
         public static void Update()
         {
-            var response = Program.client.GetAsync(Program.appPath + "/chat");
+            var response = Program.Client.GetAsync(Program.AppPath + "/chat");
             var Messages =
                 JsonConvert.DeserializeObject<List<Message>>(response.Result.Content.ReadAsStringAsync().Result);
             foreach (var msg in Messages)
@@ -22,7 +22,7 @@ namespace ConsoleClient
             
             while (true)
             {
-                response = Program.client.GetAsync(Program.appPath + "/chat");
+                response = Program.Client.GetAsync(Program.AppPath + "/chat");
                 var newMessages = 
                     JsonConvert.DeserializeObject<List<Message>>(response.Result.Content.ReadAsStringAsync().Result);
                 if (newMessages.Count > Messages.Count)

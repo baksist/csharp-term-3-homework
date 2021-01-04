@@ -4,16 +4,16 @@ using System.Threading;
 
 namespace ConsoleClient
 {
-    public class Activity
+    public static class Activity
     {
         private const int ActivityPeriod = 150;
         public static void Update()
         {
             while (true)
             {
-                var request = new HttpRequestMessage(HttpMethod.Post, Program.appPath + "/activity");
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Program.token);
-                var response = Program.client.SendAsync(request);
+                var request = new HttpRequestMessage(HttpMethod.Post, Program.AppPath + "/activity");
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Program.Token);
+                var response = Program.Client.SendAsync(request);
                 Thread.Sleep(ActivityPeriod);
             }
         }
