@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
 namespace ConsoleClient
@@ -70,6 +71,18 @@ namespace ConsoleClient
                     Console.WriteLine("Ok, using default settings");
                     Program.Login();
                 }
+            }
+        }
+
+        public static void SetHost(string host, string port)
+        {
+            const string validIP = @"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
+            const string validHostname = @"^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$";
+            const string validPort = @"^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$";
+
+            if ((Regex.IsMatch(host, validIP) || Regex.IsMatch(host, validHostname)) && Regex.IsMatch(port, validPort))
+            {
+                Program.AppPath = $"http://{host}:{port}";
             }
         }
     }

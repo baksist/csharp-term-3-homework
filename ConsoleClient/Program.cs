@@ -13,13 +13,15 @@ namespace ConsoleClient
     {
         public static string AppPath = "http://localhost:5000";
         public static string Token;
-        public static HttpClient Client = new HttpClient();
+        public static readonly HttpClient Client = new HttpClient();
         public static string Username;
         public static string Password;
         public static string Role;
         
         static void Main(string[] args)
         {
+            if (args.Length == 2) 
+                Config.SetHost(args[0], args[1]);
 
             Config.Greeter();
 
