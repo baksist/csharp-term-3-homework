@@ -16,6 +16,7 @@ namespace ConsoleClient
         public static HttpClient client = new HttpClient();
         public static string username;
         public static string password;
+        public static string role;
         
         static void Main(string[] args)
         {
@@ -46,8 +47,8 @@ namespace ConsoleClient
             }
             */
             
-            username = "new_user";
-            password = "12345";
+            username = "admin1337";
+            password = "kek";
             
             Authenticate(username, password);
 
@@ -57,6 +58,10 @@ namespace ConsoleClient
             var messageThread = new Thread(MessageHistory.Update) {Name = "messagesThread"};
             messageThread.Start();
 
+            while (true)
+            {
+                SendMessage.Send();
+            }
         }
 
         static void Authenticate(string _username, string _password)
@@ -69,6 +74,7 @@ namespace ConsoleClient
             var response = client.PostAsJsonAsync(appPath + "/users/token", requestData);
             var rep = response.Result.Content.ReadAsStringAsync().Result;
             token = JsonConvert.DeserializeObject<Dictionary<string, string>>(rep)["access_token"];
+            role = JsonConvert.DeserializeObject<Dictionary<string, string>>(rep)["role"];
         }
 
         public static void Login()

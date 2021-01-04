@@ -50,7 +50,7 @@ namespace Server.Controllers
                 signingCredentials: new SigningCredentials(TokenOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
             var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
 
-            var response = new {access_token = encodedToken};
+            var response = new {access_token = encodedToken, role = Program.Users.FirstOrDefault(x => x.Username == creds.username).Role};
             return Json(response);
         }
 

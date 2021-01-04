@@ -6,7 +6,7 @@ namespace ConsoleClient
 {
     public class Activity
     {
-        public static int ActivityPeriod = 150;
+        private const int ActivityPeriod = 150;
         public static void Update()
         {
             while (true)
