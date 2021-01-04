@@ -60,7 +60,6 @@
     <Compile Include="ChatForm.Designer.cs">
       <DependentUpon>ChatForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Config.cs" />
     <Compile Include="GreeterForm.cs">
       <SubType>Form</SubType>
     </Compile>

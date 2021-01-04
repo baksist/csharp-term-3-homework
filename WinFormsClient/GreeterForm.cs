@@ -48,7 +48,7 @@ namespace WinFormsClient
                 form.Show();
             }
         }
-        private const string ConfigPath = "config.json";
+        public const string ConfigPath = "config.json";
 
         private void LoadConfig()
         {
@@ -69,7 +69,7 @@ namespace WinFormsClient
             }
         }
 
-        private void SaveConfig()
+        public void SaveConfig()
         {
             var properties = new Dictionary<string, string>
             {

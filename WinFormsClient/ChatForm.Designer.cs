@@ -35,6 +35,9 @@
             // 
             // chatTextBox
             // 
+            this.chatTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.chatTextBox.Location = new System.Drawing.Point(33, 27);
             this.chatTextBox.Multiline = true;
             this.chatTextBox.Name = "chatTextBox";
@@ -45,6 +48,8 @@
             // 
             // messageTextBox
             // 
+            this.messageTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.messageTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
             this.messageTextBox.Location = new System.Drawing.Point(33, 389);
             this.messageTextBox.Name = "messageTextBox";
@@ -53,6 +58,7 @@
             // 
             // sendButton
             // 
+            this.sendButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.sendButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
             this.sendButton.Location = new System.Drawing.Point(625, 389);
             this.sendButton.Name = "sendButton";
@@ -74,6 +80,7 @@
             this.Text = "ChatForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChatForm_FormClosed);
             this.Load += new System.EventHandler(this.ChatForm_Load);
+            this.Resize += new System.EventHandler(this.ChatForm_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 

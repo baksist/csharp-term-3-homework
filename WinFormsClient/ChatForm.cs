@@ -12,6 +12,7 @@ using System.Threading;
 using System.Text.RegularExpressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.IO;
 
 namespace WinFormsClient
 {
@@ -124,6 +125,24 @@ namespace WinFormsClient
             {
                 MessageBox.Show("error");
             }
+        }
+
+        private void ChatForm_Resize(object sender, EventArgs e)
+        {
+            var properties = new Dictionary<string, string>
+            {
+                {"username", Program.Username},
+                {"password", Program.Password},
+                {"message_update", ChatForm.UpdatePeriod.ToString()},
+                {"width", this.Size.Width.ToString() },
+                {"height", this.Size.Height.ToString() }
+            };
+
+            var writer = new StreamWriter(GreeterForm.ConfigPath, false);
+            writer.Write(JsonConvert.SerializeObject(properties));
+            writer.Close();
+            Program.Size[0] = this.Size.Width;
+            Program.Size[1] = this.Size.Height;
         }
     }
 }
